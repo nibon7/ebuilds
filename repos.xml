@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>nibon7-ebuilds</name>
+    <description>my customized ebuilds</description>
+    <homepage>http://github.com/nibon7/ebuilds</homepage>
+    <owner type="project">
+      <email>nibon7@aliyun.com</email>
+      <name>nibon7-ebuilds</name>
+    </owner>
+    <source type="git">git://github.com/nibon7/ebuilds.git, https://github.com/nibon7/ebuilds.git</source>
+  </repo>
+</repositories>
