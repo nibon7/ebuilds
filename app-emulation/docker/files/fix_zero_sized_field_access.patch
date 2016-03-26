@@ -1,0 +1,66 @@
+diff --git a/daemon/graphdriver/devmapper/deviceset.go b/daemon/graphdriver/devmapper/deviceset.go
+index e1c8866..ff9e0fa 100644
+--- a/daemon/graphdriver/devmapper/deviceset.go
++++ b/daemon/graphdriver/devmapper/deviceset.go
+@@ -1272,14 +1272,15 @@ func (devices *DeviceSet) deactivatePool() error {
+ 	if err != nil {
+ 		return err
+ 	}
+-	if d, err := devicemapper.GetDeps(devname); err == nil {
+-		// Access to more Debug output
+-		logrus.Debugf("[devmapper] devicemapper.GetDeps() %s: %#v", devname, d)
++	if devinfo.Exists == 0 {
++		return nil
+ 	}
+-	if devinfo.Exists != 0 {
+-		return devicemapper.RemoveDevice(devname)
++	if err := devicemapper.RemoveDevice(devname); err != nil {
++		return err
++	}
++	if d, err := devicemapper.GetDeps(devname); err == nil {
++		logrus.Warnf("[devmapper] device %s still has %d active dependents", devname, d.Count)
+ 	}
+-
+ 	return nil
+ }
+ 
+diff --git a/pkg/devicemapper/devmapper_wrapper.go b/pkg/devicemapper/devmapper_wrapper.go
+index 87c2003..44ca772 100644
+--- a/pkg/devicemapper/devmapper_wrapper.go
++++ b/pkg/devicemapper/devmapper_wrapper.go
+@@ -38,7 +38,10 @@ static void	log_with_errno_init()
+ */
+ import "C"
+ 
+-import "unsafe"
++import (
++	"reflect"
++	"unsafe"
++)
+ 
+ type (
+ 	CDmTask C.struct_dm_task
+@@ -184,12 +187,21 @@ func dmTaskGetDepsFct(task *CDmTask) *Deps {
+ 	if Cdeps == nil {
+ 		return nil
+ 	}
++
++	// golang issue: https://github.com/golang/go/issues/11925
++	hdr := reflect.SliceHeader{
++		Data: uintptr(unsafe.Pointer(uintptr(unsafe.Pointer(Cdeps)) + unsafe.Sizeof(*Cdeps))),
++		Len:  int(Cdeps.count),
++		Cap:  int(Cdeps.count),
++	}
++	devices := *(*[]C.uint64_t)(unsafe.Pointer(&hdr))
++
+ 	deps := &Deps{
+ 		Count:  uint32(Cdeps.count),
+ 		Filler: uint32(Cdeps.filler),
+ 	}
+-	for _, device := range Cdeps.device {
+-		deps.Device = append(deps.Device, (uint64)(device))
++	for _, device := range devices {
++		deps.Device = append(deps.Device, uint64(device))
+ 	}
+ 	return deps
+ }
