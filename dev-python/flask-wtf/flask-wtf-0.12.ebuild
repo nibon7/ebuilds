@@ -3,16 +3,19 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
+PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 
 # silly captcha test trying to access things over the network
 RESTRICT="test"
 
 inherit distutils-r1
 
+MY_PN="Flask-WTF"
+MY_P="${MY_PN}-${PV}"
+
 DESCRIPTION="Simple integration of Flask and WTForms, including CSRF, file upload and Recaptcha integration"
 HOMEPAGE="http://pythonhosted.org/Flask-WTF/ https://pypi.python.org/pypi/Flask-WTF"
-SRC_URI="https://github.com/lepture/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -32,6 +35,8 @@ DEPEND="${RDEPEND}
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}]
 		$(python_gen_cond_dep 'dev-python/werkzeug[${PYTHON_USEDEP}]' python2_7 )
 	)"
+
+S="${WORKDIR}/${MY_P}"
 
 python_compile_all() {
 	use doc && esetup.py build_sphinx
