@@ -7,11 +7,11 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 
 inherit distutils-r1
 
-MY_PN="Flask-Bootstrap"
+MY_PN="Flask-DebugToolbar"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="Packages Bootstrap into an extension that mostly consists of a blueprint named 'bootstrap'"
-HOMEPAGE="https://pypi.python.org/pypi/Flask-Bootstrap"
+DESCRIPTION="A toolbar overlay for debugging Flask applications"
+HOMEPAGE="https://pypi.python.org/pypi/Flask-DebugToolbar"
 SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

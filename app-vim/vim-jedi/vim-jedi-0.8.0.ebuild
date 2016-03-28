@@ -4,18 +4,23 @@
 
 EAPI=5
 
-PYTHON_COMPAT=(python2_7 python3_{3,4})
+PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 inherit python-r1
+
+MY_PN="jedi-vim"
+MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Awesome Python autocompletion with VIM"
 HOMEPAGE="https://github.com/davidhalter/jedi-vim"
-SRC_URI="https://github.com/davidhalter/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/davidhalter/${MY_PN}/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 
 LICENSE="LGPL-3+"
 KEYWORDS="amd64 x86"
 SLOT="0"
 
 RDEPEND="dev-python/jedi[${PYTHON_USEDEP}]"
+
+S="${WORKDIR}/${MY_P}"
 
 src_install() {
 	insinto /usr/share/vim/vimfiles/
