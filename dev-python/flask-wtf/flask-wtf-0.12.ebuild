@@ -22,9 +22,11 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="doc test"
 
-RDEPEND="dev-python/flask[${PYTHON_USEDEP}]
+RDEPEND="
+	dev-python/flask[${PYTHON_USEDEP}]
 	>=dev-python/wtforms-1.0.5[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
+DEPEND="
+	${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		dev-python/nose[${PYTHON_USEDEP}]

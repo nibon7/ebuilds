@@ -20,10 +20,11 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="
->=dev-python/flask-0.10[${PYTHON_USEDEP}]
-dev-python/dominate[${PYTHON_USEDEP}]
-dev-python/visitor[${PYTHON_USEDEP}]
-"
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
+	>=dev-python/flask-0.10[${PYTHON_USEDEP}]
+	dev-python/dominate[${PYTHON_USEDEP}]
+	dev-python/visitor[${PYTHON_USEDEP}]"
+DEPEND="
+	${RDEPEND}
+	dev-python/setuptools[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/${MY_P}"

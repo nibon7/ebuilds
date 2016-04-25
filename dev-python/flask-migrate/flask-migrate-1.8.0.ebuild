@@ -19,13 +19,14 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="test"
 
-RDEPEND="dev-python/flask[${PYTHON_USEDEP}]"
-DEPEND="${RDEPEND}
+RDEPEND="
+	dev-python/flask[${PYTHON_USEDEP}]"
+DEPEND="
+	${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-python/alembic[${PYTHON_USEDEP}]
 	dev-python/flask-sqlalchemy[${PYTHON_USEDEP}]
-	dev-python/flask-script[${PYTHON_USEDEP}]
-	"
+	dev-python/flask-script[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/${MY_P}"
 
