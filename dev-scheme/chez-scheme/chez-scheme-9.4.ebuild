@@ -16,11 +16,16 @@ SRC_URI="https://github.com/cisco/ChezScheme/archive/v9.4.tar.gz -> ${MY_P}.tar.
 	"
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="x86 amd64"
+KEYWORDS="x86 amd64 ~x86-fbsd ~amd64-fbsd ~ppc"
+IUSE="doc"
 
 DEPEND="
   sys-libs/ncurses
   x11-libs/libX11
+  doc? (
+    media-libs/netpbm
+    dev-texlive/texlive-latex
+  )
   "
 RDEPEND="${DEPEND}"
 
@@ -35,4 +40,23 @@ src_prepare() {
 
 src_configure() {
 	./configure --installprefix=/usr --temproot=${D}
+}
+
+src_compile() {
+	emake || die
+
+	if use doc; then
+		emake docs || die
+	fi
+}
+
+src_test() {
+	emake test || die
+}
+
+src_install() {
+	emake install || die
+	if use doc; then
+		dodoc  release_notes/release_notes.pdf csug/csug.pdf
+	fi
 }
