@@ -19,20 +19,11 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="
-	>=media-libs/libpng-1.2.46
+RDEPEND="
+	media-libs/libpng:0/16
 	>=x11-libs/gtk+-2.24.8-r1:2
 	x11-libs/cairo
 	gnome-base/gconf
-	x11-libs/libXtst
-"
-
-RDEPEND="
-	${DEPEND}
-	>=net-print/cups-2.0.0
-	x11-libs/libnotify
-	x11-libs/libXScrnSaver
-	app-crypt/libsecret[crypt]
 "
 
 QA_PRESTRIPPED="opt/${PN}/code"
@@ -50,8 +41,8 @@ src_install(){
 	doicon resources/app/resources/linux/code.png
 	domenu "${FILESDIR}"/code.desktop
 	fperms +x "/opt/${PN}/code"
-	fperms +x "/opt/${PN}/bin/code"
 	fperms +x "/opt/${PN}/libnode.so"
+	fperms +x "/opt/${PN}/libffmpeg.so"
 	insinto "/usr/share/licenses/${PN}"
 	newins "resources/app/LICENSE.txt" "LICENSE"
 }
