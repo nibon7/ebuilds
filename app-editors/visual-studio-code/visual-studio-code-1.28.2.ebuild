@@ -41,6 +41,7 @@ src_install(){
 	doicon resources/app/resources/linux/code.png
 	domenu "${FILESDIR}"/code.desktop
 	fperms +x "/opt/${PN}/code"
+	fperms +x "/opt/${PN}/bin/code"
 	fperms +x "/opt/${PN}/libnode.so"
 	fperms +x "/opt/${PN}/libffmpeg.so"
 	insinto "/usr/share/licenses/${PN}"

@@ -21,14 +21,10 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="
+RDEPEND="
 	gnome-base/gconf
 	x11-libs/cairo
 	x11-libs/gtk+
-"
-
-RDEPEND="
-	${DEPEND}
 "
 
 QA_PRESTRIPPED="opt/${PN}/${MY_PN}"
