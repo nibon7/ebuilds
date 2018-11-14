@@ -25,6 +25,7 @@ RDEPEND="
 	x11-libs/libXdmcp
 	x11-libs/libXau
 	x11-libs/libxcb
+	app-crypt/libsecret
 	!x11-terms/tilix"
 
 
