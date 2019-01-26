@@ -20,7 +20,6 @@ RDEPEND="
 	x11-libs/vte:2.91
 	>=x11-libs/gtk+-3.22
 	dev-libs/libbsd
-	sys-devel/gcc
 	x11-libs/libX11
 	x11-libs/libXdmcp
 	x11-libs/libXau
