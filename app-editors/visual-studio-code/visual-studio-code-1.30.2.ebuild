@@ -20,6 +20,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND="
+	app-crypt/libsecret
 	media-libs/libpng:0/16
 	>=x11-libs/gtk+-2.24.8-r1:2
 	x11-libs/cairo
@@ -37,15 +38,14 @@ src_install(){
 	pax-mark m code
 	insinto "/opt/${PN}"
 	doins -r *
-	dosym "/opt/${PN}/bin/code" "/usr/bin/code"
-	doicon resources/app/resources/linux/code.png
-	domenu "${FILESDIR}"/code.desktop
 	fperms +x "/opt/${PN}/code"
 	fperms +x "/opt/${PN}/bin/code"
 	fperms +x "/opt/${PN}/libnode.so"
 	fperms +x "/opt/${PN}/libffmpeg.so"
-	insinto "/usr/share/licenses/${PN}"
-	newins "resources/app/LICENSE.txt" "LICENSE"
+	doicon resources/app/resources/linux/code.png
+	domenu "${FILESDIR}"/code.desktop
+	dosym "/opt/${PN}/bin/code" "/usr/bin/code"
+	dodoc "resources/app/LICENSE.txt"
 }
 
 pkg_postinst(){
