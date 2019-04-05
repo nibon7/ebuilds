@@ -42,10 +42,11 @@ src_install(){
 	fperms +x "/opt/${PN}/bin/code"
 	fperms +x "/opt/${PN}/libnode.so"
 	fperms +x "/opt/${PN}/libffmpeg.so"
+	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
 	doicon resources/app/resources/linux/code.png
 	domenu "${FILESDIR}"/code.desktop
 	dosym "/opt/${PN}/bin/code" "/usr/bin/code"
-	dodoc "resources/app/LICENSE.txt"
+	dodoc "resources/app/LICENSE.rtf"
 }
 
 pkg_postinst(){
