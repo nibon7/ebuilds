@@ -1,9 +1,16 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit xdg-utils gnome2-utils
+inherit xdg-utils unpacker gnome2-utils
+
+TILIX_LANGS="ak ar ar_MA bg cs de el eo es eu fi fr he hu id it ja ko lt nb_NO
+	nl pl pt_BR pt_PT ru sr sv tr uk vi zh_CN zh_Hant zh_TW"
+
+for lang in ${TILIX_LANGS}; do
+	IUSE+=" +l10n_${lang}"
+done
 
 DESCRIPTION="A tiling terminal emulator for Linux using GTK+ 3"
 HOMEPAGE="https://gnunn1.github.io/tilix-web/"
@@ -19,31 +26,43 @@ SRC_URI="${GITHUB_URI}/${MY_PN}/releases/download/${PV}/${MY_PN}.zip -> ${P}.zip
 RDEPEND="
 	x11-libs/vte:2.91
 	>=x11-libs/gtk+-3.22
+	gnome-base/dconf
 	dev-libs/libbsd
 	x11-libs/libX11
 	x11-libs/libXdmcp
 	x11-libs/libXau
 	x11-libs/libxcb
-	app-crypt/libsecret
 	!x11-terms/tilix"
 
+S=${WORKDIR}
 
 QA_PRESTRIPPED="usr/bin/tilix"
-QA_PREBUILT="usr/bin/tilix"
 
 src_unpack() {
-	mkdir "${S}" || die
-	pushd "${S}"
-	unpack ${A}
-	popd
+	:
 }
 
 src_install() {
-	doins -r usr || die
-	fperms +x /usr/bin/${MY_PN}
+	dodir /
+	cd "${ED}" || die
+	unpacker
+
+	gzip -d usr/share/man/man1/tilix.1.gz || die
+
+	for lang in ${TILIX_LANGS}; do
+		if ! use l10n_${lang}; then
+			rm -fr usr/share/man/${lang} || die
+			rm -fr usr/share/locale/${lang} || die
+		fi
+
+		if [[ -e usr/share/man/${lang}/man1/tilix.1.gz ]]; then
+			gzip -d usr/share/man/${lang}/man1/tilix.1.gz || die
+		fi
+	done
 }
 
 pkg_preinst() {
+	gnome2_schemas_savelist
 	gnome2_icon_savelist
 }
 
@@ -57,6 +76,7 @@ pkg_postinst() {
 	gnome2_schemas_update
 	gnome2_icon_cache_update
 	xdg_desktop_database_update
+
 	elog "If you have issues with configuration,follow the offical guide in"
 	elog "https://gnunn1.github.io/tilix-web/manual/vteconfig"
 }
