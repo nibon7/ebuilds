@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -23,24 +23,22 @@ RDEPEND="${DEPEND}"
 
 QA_PREBUILT="*"
 
-src_unpack() {
-	if [ "${A}" != "" ]; then
-		unpack ${A}
-	fi
-	S=${WORKDIR}
-}
+S=${WORKDIR}
 
-src_configure() {
-	sed -i 's#/usr/bin/v2ray/v2ray#/usr/bin/v2ray#g' systemd/v2ray.service
+src_unpack() {
+	unpack ${A}
 }
 
 src_install() {
-	local _libdir=$(get_libdir)
-	insinto /usr/${_libdir}/v2ray
+	local libdir=$(get_libdir)
+
+	sed -i 's#/usr/bin/v2ray/v2ray#/usr/bin/v2ray#g' systemd/v2ray.service
+
+	insinto /usr/${libdir}/v2ray
 	doins v2ray v2ctl geoip.dat geosite.dat
-	dosym ../${_libdir}/v2ray/v2ray /usr/bin/v2ray
-	dosym ../${_libdir}/v2ray/v2ctl /usr/bin/v2ctl
-	fperms 0755 /usr/${_libdir}/v2ray/{v2ray,v2ctl}
+	dosym ../${libdir}/v2ray/v2ray usr/bin/v2ray
+	dosym ../${libdir}/v2ray/v2ctl usr/bin/v2ctl
+	fperms 0755 /usr/${libdir}/v2ray/{v2ray,v2ctl}
 
 	insinto /etc/v2ray
 	doins *.json
