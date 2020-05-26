@@ -13,6 +13,8 @@ SLOT="0"
 KEYWORDS="-* ~amd64"
 IUSE=""
 
+RESTRICT="mirror strip bindist"
+
 DEPEND="
 	>=app-i18n/fcitx-4.2.8
 	>=dev-libs/glib-2.62
@@ -36,7 +38,7 @@ src_install() {
 	unpack_deb "${S}/${PN}.deb"
 
 	# remove useless files
-	rm -r "${PN}.deb" || die
+	rm "${PN}.deb" || die
 	rm -r usr/lib || die
 
 	local libdir=$(get_libdir)
