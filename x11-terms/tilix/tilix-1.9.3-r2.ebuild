@@ -16,14 +16,16 @@ DESCRIPTION="A tiling terminal emulator for Linux using GTK+ 3"
 HOMEPAGE="https://gnunn1.github.io/tilix-web/"
 LICENSE="MPL-2.0"
 
-SLOT="0"
-KEYWORDS="~amd64 ~x86"
+RESTRICT="mirror strip bindist"
 
-MY_PN=${PN%-bin}
+SLOT="0"
+KEYWORDS="-* ~amd64"
+
 GITHUB_URI="https://github.com/gnunn1"
-SRC_URI="${GITHUB_URI}/${MY_PN}/releases/download/${PV}/${MY_PN}.zip -> ${P}.zip"
+SRC_URI="${GITHUB_URI}/${PN}/releases/download/${PV}/${PN}.zip -> ${P}.zip"
 
 RDEPEND="
+	app-crypt/libsecret
 	x11-libs/vte:2.91
 	>=x11-libs/gtk+-3.22
 	gnome-base/dconf
@@ -31,12 +33,13 @@ RDEPEND="
 	x11-libs/libX11
 	x11-libs/libXdmcp
 	x11-libs/libXau
-	x11-libs/libxcb
-	!x11-terms/tilix"
+	x11-libs/libxcb"
 
 S=${WORKDIR}
 
-QA_PRESTRIPPED="usr/bin/tilix"
+pkg_pretend() {
+	use amd64 || die "${PN} only works on amd64"
+}
 
 src_unpack() {
 	:
