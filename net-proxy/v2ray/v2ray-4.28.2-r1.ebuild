@@ -178,7 +178,8 @@ src_install() {
 	dobin bin/v2ray
 
 	pushd release/config || die
-	sed -i 's#/usr/local/bin/v2ray#/usr/bin/v2ray#g' \
+	sed -i -e 's#/usr/local/bin#/usr/bin#g' \
+		-e 's#/usr/local/etc#/etc#g' \
 		systemd/system/v2ray.service \
 		systemd/system/v2ray@.service || die
 
