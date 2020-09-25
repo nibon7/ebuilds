@@ -172,7 +172,6 @@ src_compile() {
 	go build -o bin/v2ctl -tags confonly -ldflags "${LDFLAGS}" v2ray.com/core/infra/control/main || die
 }
 
-
 src_install() {
 	dobin bin/v2ray
 	dobin bin/v2ray
