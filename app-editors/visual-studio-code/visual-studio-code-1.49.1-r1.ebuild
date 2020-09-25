@@ -13,8 +13,7 @@ RESTRICT="mirror strip bindist"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
-IUSE="libsecret"
+KEYWORDS="amd64"
 
 DEPEND=">=gnome-base/gconf-3.2.6-r4:2
 	>=media-libs/libpng-1.2.46:0
@@ -28,7 +27,7 @@ RDEPEND="
 	>=x11-libs/libnotify-0.7.7:0
 	>=x11-libs/libXScrnSaver-1.2.2-r1:0
 	dev-libs/nss
-	libsecret? ( app-crypt/libsecret[crypt] )
+	app-crypt/libsecret[crypt]
 "
 
 QA_PRESTRIPPED="opt/${PN}/code"
@@ -48,7 +47,7 @@ src_install(){
 	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
 	doicon resources/app/resources/linux/code.png
 	domenu "${FILESDIR}"/code.desktop
-	dosym "/opt/${PN}/bin/code" "/usr/bin/code"
+	dosym "../../opt/${PN}/bin/code" "/usr/bin/code"
 	dodoc "resources/app/LICENSE.rtf"
 }
 
