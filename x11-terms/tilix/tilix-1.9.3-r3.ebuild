@@ -8,10 +8,6 @@ inherit xdg-utils unpacker gnome2-utils
 TILIX_LANGS="ak ar ar_MA bg cs de el eo es eu fi fr he hu id it ja ko lt nb_NO
 	nl pl pt_BR pt_PT ru sr sv tr uk vi zh_CN zh_Hant zh_TW"
 
-for lang in ${TILIX_LANGS}; do
-	IUSE+=" +l10n_${lang}"
-done
-
 DESCRIPTION="A tiling terminal emulator for Linux using GTK+ 3"
 HOMEPAGE="https://gnunn1.github.io/tilix-web/"
 LICENSE="MPL-2.0"
@@ -53,11 +49,6 @@ src_install() {
 	gzip -d usr/share/man/man1/tilix.1.gz || die
 
 	for lang in ${TILIX_LANGS}; do
-		if ! use l10n_${lang}; then
-			rm -fr usr/share/man/${lang} || die
-			rm -fr usr/share/locale/${lang} || die
-		fi
-
 		if [[ -e usr/share/man/${lang}/man1/tilix.1.gz ]]; then
 			gzip -d usr/share/man/${lang}/man1/tilix.1.gz || die
 		fi
