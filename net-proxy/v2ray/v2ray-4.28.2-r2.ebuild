@@ -174,16 +174,14 @@ src_compile() {
 
 src_install() {
 	dobin bin/v2ray
-	dobin bin/v2ray
+	dobin bin/v2ctl
 
 	pushd release/config || die
 	sed -i -e 's#/usr/local/bin#/usr/bin#g' \
 		-e 's#/usr/local/etc#/etc#g' \
-		systemd/system/v2ray.service \
-		systemd/system/v2ray@.service || die
+		systemd/system/v2ray*.service || die
 
-	systemd_dounit systemd/system/v2ray.service
-	systemd_dounit systemd/system/v2ray@.service
+	systemd_dounit systemd/system/v2ray*.service
 
 	insinto /usr/share/v2ray
 	doins *.dat
@@ -193,5 +191,4 @@ src_install() {
 	popd
 
 	dodoc README.md
-	newinitd "${FILESDIR}/v2ray.initd" v2ray
 }
