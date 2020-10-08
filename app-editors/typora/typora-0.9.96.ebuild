@@ -16,7 +16,7 @@ SRC_URI="${BASE_URI}/${PN}_${PV}_amd64.deb"
 
 RESTRICT="mirror strip bindist"
 
-LICENSE="MIT"
+LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 
@@ -41,11 +41,7 @@ src_install(){
 	unpacker
 
 	rm -r usr/share/lintian || die
-	rm "usr/share/${PN}/resources/app/Docs/DO NOT ADD FILES HERE" || die
-	rm "usr/share/${PN}/DO NOT ADD FILES HERE.md" || die
-
 	mv usr/share/doc/${PN} usr/share/doc/${PF} || die
-
 	sed -i '/Change Log/d' usr/share/applications/${PN}.desktop || die
 
 	pushd usr/share/${PN}/locales >/dev/null || die
