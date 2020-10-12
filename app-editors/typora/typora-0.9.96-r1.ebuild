@@ -16,7 +16,7 @@ SRC_URI="${BASE_URI}/${PN}_${PV}_amd64.deb"
 
 RESTRICT="mirror strip bindist"
 
-LICENSE="all-rights-reserved"
+LICENSE="Typora-EULA"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 
