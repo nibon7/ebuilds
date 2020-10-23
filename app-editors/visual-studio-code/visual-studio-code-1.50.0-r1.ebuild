@@ -11,7 +11,7 @@ BASE_URI="https://vscode-update.azurewebsites.net/${PV}"
 SRC_URI="amd64? ( ${BASE_URI}/linux-x64/stable -> ${P}-amd64.tar.gz )"
 RESTRICT="mirror strip bindist"
 
-LICENSE="MIT"
+LICENSE="microsoft-visual-studio-code"
 SLOT="0"
 KEYWORDS="amd64"
 
