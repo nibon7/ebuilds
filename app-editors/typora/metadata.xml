@@ -5,4 +5,8 @@
 		<email>nibon7@163.com</email>
 		<name>nibon7</name>
 	</maintainer>
+	<longdescription>
+		Typora is a cross-platform minimal markdown editor, providing
+		seamless experience for both markdown readers and writers.
+	</longdescription>
 </pkgmetadata>
