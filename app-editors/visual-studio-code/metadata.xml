@@ -5,4 +5,9 @@
 		<email>nibon7@163.com</email>
 		<name>nibon7</name>
 	</maintainer>
+	<longdescription>
+		Visual Studio Code is a new choice of tool that combines the
+		simplicity of a code editor with what developers need for the
+		core edit-build-debug cycle.
+	</longdescription>
 </pkgmetadata>
