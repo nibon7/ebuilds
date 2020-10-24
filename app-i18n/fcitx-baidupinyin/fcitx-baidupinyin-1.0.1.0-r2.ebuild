@@ -9,6 +9,7 @@ DESCRIPTION="fcitx-baidupinyin is a wrapper of Baidu Pinyin IM engine for Fcitx.
 HOMEPAGE="https://srf.baidu.com/site/guanwang_linux/index.html"
 SRC_URI="https://imeres.baidu.com/imeres/ime-res/guanwang/img/Ubuntu_Deepin-fcitx-baidupinyin-64.zip"
 
+LICENSE="baidu-linux-im"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 IUSE=""
@@ -53,9 +54,10 @@ src_install() {
 	dosym /${BDPY_HOME}/entries/applications/fcitx-ui-baidu-qimpanel.desktop /usr/share/applications/fcitx-ui-baidu-qimpanel.desktop
 	dosym /${BDPY_HOME}/entries/locale/zh_CN/LC_MESSAGES/${PN}.mo /usr/share/locale/zh_CN/LC_MESSAGES/${PN}.mo
 
+	local size
 	for size in 16 48;
 	do
-		dosym /${BDPY_HOME}/entries/icons/hicolor/${size}x${size}/apps/${PN}.png /usr/share/icons/hicolor/${size}x${size}/apps/${PN}.png
+		doicon -s ${size} ${BDPY_HOME}/entries/icons/hicolor/${size}x${size}/apps/${PN}.png
 	done
 
 	# fix permission
