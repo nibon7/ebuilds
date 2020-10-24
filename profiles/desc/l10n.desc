@@ -1,0 +1,29 @@
+# Copyright 2016-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+# This file contains descriptions of L10N USE_EXPAND flags.
+
+# Keep it sorted. Entries must be valid IETF language tags (BCP 47):
+# https://www.iana.org/assignments/language-subtag-registry
+
+# The following are considered duplicates. Use the generic language
+# tag without region subtag instead.
+# fil-PH - Filipino (Philippines)
+# fy-NL - Western Frisian (Netherlands)
+# ga-IE - Irish (Ireland)
+# gu-IN - Gujarati (India)
+# hi-IN - Hindi (India)
+# hy-AM - Armenian (Armenia)
+# id-ID - Indonesian (Indonesia)
+# kn-IN - Kannada (India)
+# nb-NO - Norwegian Bokmål (Norway)
+# ne-NP - Nepali (Nepal)
+# nn-NO - Norwegian Nynorsk (Norway)
+# pa-IN - Punjabi (India)
+# sa-IN - Sanskrit (India)
+# sv-SE - Swedish (Sweden)
+
+ca-Es-VALENCIA - Valencian
+sr-Cyrl-BA - Serbian (Cyrillic, Bosnia and Herzegovina)
+sr-Latn-RS - Serbian (Latin, Serbia)
+uz-Latn - Uzbek (Latin)
