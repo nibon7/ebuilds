@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -40,6 +40,8 @@ pkg_setup(){
 }
 
 src_install(){
+	local VSCODE_HOME="opt/${PN}"
+
 	pushd locales >/dev/null || die
 	chromium_remove_language_paks
 	popd >/dev/null || die
@@ -50,10 +52,15 @@ src_install(){
 	doins -r *
 
 	# fix permissions
-	fperms +x "/opt/${PN}/code"
-	fperms +x "/opt/${PN}/bin/code"
-	fperms +x "/opt/${PN}/libffmpeg.so"
-	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
+	fperms +x "/${VSCODE_HOME}/code"
+	fperms +x "/${VSCODE_HOME}/bin/code"
+	fperms +x "/${VSCODE_HOME}/libEGL.so"
+	fperms +x "/${VSCODE_HOME}/libGLESv2.so"
+	fperms +x "/${VSCODE_HOME}/libffmpeg.so"
+	fperms +x "/${VSCODE_HOME}/libvk_swiftshader.so"
+	fperms +x "/${VSCODE_HOME}/libvulkan.so"
+	fperms +x "/${VSCODE_HOME}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
+	fperms 4755 "/${VSCODE_HOME}/chrome-sandbox"
 
 	doicon resources/app/resources/linux/code.png
 	domenu "${FILESDIR}"/code.desktop
