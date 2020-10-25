@@ -3,11 +3,11 @@
 
 EAPI=7
 
-inherit gnome2-utils xdg-utils unpacker
+inherit desktop gnome2-utils xdg-utils unpacker
 
 DESCRIPTION="fcitx-baidupinyin is a wrapper of Baidu Pinyin IM engine for Fcitx."
 HOMEPAGE="https://srf.baidu.com/site/guanwang_linux/index.html"
-SRC_URI="https://imeres.baidu.com/imeres/ime-res/guanwang/img/Ubuntu_Deepin-fcitx-baidupinyin-64.zip"
+SRC_URI="https://imeres.baidu.com/imeres/ime-res/guanwang/img/Ubuntu_Deepin-${PN}-64.zip"
 
 LICENSE="baidu-linux-im"
 SLOT="0"
@@ -16,14 +16,13 @@ IUSE=""
 
 RESTRICT="mirror strip bindist"
 
-DEPEND="
+RDEPEND="
 	>=app-i18n/fcitx-4.2.8
 	>=dev-libs/glib-2.62
 	>=dev-qt/qtcore-5.10
 	>=dev-qt/qtwidgets-5.10
 	>=dev-qt/qtquickcontrols-5.10
 "
-RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
 
