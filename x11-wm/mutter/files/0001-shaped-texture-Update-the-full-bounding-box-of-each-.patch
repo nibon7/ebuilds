@@ -1,0 +1,31 @@
+From 576aafa7bf516902a736208de943f5ec3c8a4326 Mon Sep 17 00:00:00 2001
+From: Daniel van Vugt <daniel.van.vugt@canonical.com>
+Date: Thu, 29 Oct 2020 16:57:45 +0800
+Subject: [PATCH] shaped-texture: Update the full bounding box of each clip
+ rectangle
+
+When using fractional scaling this matters, so that you don't miss a
+line of pixels at the edge of the clip rectangle by rounding down. This
+was observed as a line of corrupt pixels in Firefox (Wayland) tooltips.
+
+Related to: https://gitlab.gnome.org/GNOME/mutter/-/issues/1500
+---
+ src/compositor/meta-shaped-texture.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/compositor/meta-shaped-texture.c b/src/compositor/meta-shaped-texture.c
+index 6271142f2..547ff4d35 100644
+--- a/src/compositor/meta-shaped-texture.c
++++ b/src/compositor/meta-shaped-texture.c
+@@ -1002,7 +1002,7 @@ meta_shaped_texture_update_area (MetaShapedTexture     *stex,
+ 
+   meta_rectangle_scale_double (clip,
+                                1.0 / stex->buffer_scale,
+-                               META_ROUNDING_STRATEGY_SHRINK,
++                               META_ROUNDING_STRATEGY_GROW,
+                                clip);
+ 
+   inverted_transform = meta_monitor_transform_invert (stex->transform);
+-- 
+GitLab
+
