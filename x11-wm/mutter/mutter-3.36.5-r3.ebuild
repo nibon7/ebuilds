@@ -96,7 +96,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}"/3.34.6-tests-dontreq-gdkwayland.patch
 	"${FILESDIR}"/0001-shaped-texture-Update-the-full-bounding-box-of-each-.patch
-	"${FILESDIR}"/0001-cullable-Allow-culling-of-compatible-effects.patch
+	"${FILESDIR}"/0001-clutter-stage-cogl-Expand-the-redraw_clip-slightly-f.patch
 )
 
 src_configure() {
