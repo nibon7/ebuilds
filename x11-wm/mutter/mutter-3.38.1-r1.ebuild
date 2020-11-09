@@ -30,7 +30,7 @@ DEPEND="
 	>=x11-libs/pango-1.30[introspection?]
 	>=dev-libs/fribidi-1.0.0
 	>=x11-libs/cairo-1.14[X]
-	>=gnome-base/gsettings-desktop-schemas-3.33.0[introspection?]
+	>=gnome-base/gsettings-desktop-schemas-3.38.0[introspection?]
 	>=dev-libs/glib-2.61.1:2
 	gnome-base/gnome-settings-daemon
 	>=dev-libs/json-glib-0.12.0[introspection?]
@@ -78,7 +78,7 @@ RDEPEND="${DEPEND}
 "
 DEPEND="${DEPEND}
 	x11-base/xorg-proto
-	sysprof? ( >=dev-util/sysprof-capture-3.35.2:3 )
+	sysprof? ( >=dev-util/sysprof-capture-3.38.1:3 )
 "
 # wayland bdepend for wayland-scanner, xorg-server for cvt utility
 BDEPEND="
@@ -94,9 +94,9 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/3.34.6-tests-dontreq-gdkwayland.patch
 	"${FILESDIR}"/0001-shaped-texture-Update-the-full-bounding-box-of-each-.patch
-	"${FILESDIR}"/0001-clutter-stage-cogl-Expand-the-redraw_clip-slightly-f.patch
+	"${FILESDIR}"/0001-clutter-stage-cogl-Simplify-and-optimize-damage-clip.patch
+	"${FILESDIR}"/0001-clutter-stage-cogl-Enlarge-redraw_clip-for-fractiona.patch
 )
 
 src_configure() {

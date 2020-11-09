@@ -1,4 +1,4 @@
-From 576aafa7bf516902a736208de943f5ec3c8a4326 Mon Sep 17 00:00:00 2001
+From e34f725c52e732c29e8cd485c8e905cf83c8b4a3 Mon Sep 17 00:00:00 2001
 From: Daniel van Vugt <daniel.van.vugt@canonical.com>
 Date: Thu, 29 Oct 2020 16:57:45 +0800
 Subject: [PATCH] shaped-texture: Update the full bounding box of each clip
@@ -9,6 +9,8 @@ line of pixels at the edge of the clip rectangle by rounding down. This
 was observed as a line of corrupt pixels in Firefox (Wayland) tooltips.
 
 Related to: https://gitlab.gnome.org/GNOME/mutter/-/issues/1500
+
+https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/1539
 ---
  src/compositor/meta-shaped-texture.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
