@@ -3,13 +3,13 @@
 
 EAPI="6"
 
+inherit git-r3
+
 DESCRIPTION="double-pinyin input for rime"
 HOMEPAGE="https://github.com/rime/rime-double-pinyin"
 
-if [ "${PV}" = "9999" ]; then
-	EGIT_REPO_URI="https://github.com/rime/rime-double-pinyin.git"
-	inherit git-r3
-fi
+EGIT_REPO_URI="https://github.com/rime/rime-double-pinyin.git"
+EGIT_COMMIT="69bf85d4dfe8bac139c36abbd68d530b8b6622ea"
 
 LICENSE="GPL-3"
 SLOT="0"
