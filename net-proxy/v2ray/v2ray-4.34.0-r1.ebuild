@@ -353,31 +353,26 @@ IUSE=""
 S="${WORKDIR}/${MY_P}"
 
 src_compile() {
-	export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external"
 	export CGO_CFLAGS="${CFLAGS}"
 	export CGO_CPPFLAGS="${CPPFLAGS}"
 	export CGO_LDFLAGS="${LDFLAGS}"
 
-	go build -o v2ray ./main || die
-	go build -o v2ctl ./infra/control/main || die
+	go build -o v2ray -trimpath -ldflags "-w -s -buildid=" ./main || die
+	go build -o v2ctl -trimpath -ldflags "-w -s -buildid=" -tags confonly ./infra/control/main || die
 }
 
 src_install() {
 	dobin v2ray v2ctl
+	dodoc README.md LICENSE
 
-	pushd release/config || die
-	sed -i -e 's#/usr/local/bin#/usr/bin#g' \
-		-e 's#/usr/local/etc#/etc#g'		\
-		systemd/system/v2ray*.service || die
+	sed -i 's#/usr/local/bin#/usr/bin#g;s#/usr/local/etc#/etc#g' \
+		release/config/systemd/system/v2ray*.service || die
 
-	systemd_dounit systemd/system/v2ray*.service
+	systemd_dounit release/config/systemd/system/v2ray*.service
 
 	insinto /usr/share/v2ray
-	doins *.dat
+	doins release/config/*.dat
 
 	insinto /etc/v2ray
-	doins *.json
-	popd
-
-	dodoc README.md LICENSE
+	doins release/config/*.json
 }
