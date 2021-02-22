@@ -5,9 +5,6 @@ EAPI=6
 
 inherit xdg-utils unpacker gnome2-utils
 
-TILIX_LANGS="ak ar ar_MA bg cs de el eo es eu fi fr he hu id it ja ko lt nb_NO
-	nl pl pt_BR pt_PT ru sr sv tr uk vi zh_CN zh_Hant zh_TW"
-
 DESCRIPTION="A tiling terminal emulator for Linux using GTK+ 3"
 HOMEPAGE="https://gnunn1.github.io/tilix-web/"
 LICENSE="MPL-2.0"
@@ -18,7 +15,7 @@ SLOT="0"
 KEYWORDS="-* ~amd64"
 
 GITHUB_URI="https://github.com/gnunn1"
-SRC_URI="${GITHUB_URI}/${PN}/releases/download/${PV}/${PN}.zip -> ${P}.zip"
+SRC_URI="${GITHUB_URI}/${PN}/releases/download/${PV}/${P}_x86_64-linux-gnu.zip"
 
 RDEPEND="
 	app-crypt/libsecret
@@ -46,13 +43,7 @@ src_install() {
 	cd "${ED}" || die
 	unpacker
 
-	gzip -d usr/share/man/man1/tilix.1.gz || die
-
-	for lang in ${TILIX_LANGS}; do
-		if [[ -e usr/share/man/${lang}/man1/tilix.1.gz ]]; then
-			gzip -d usr/share/man/${lang}/man1/tilix.1.gz || die
-		fi
-	done
+	mv ${P} usr || die
 }
 
 pkg_preinst() {
